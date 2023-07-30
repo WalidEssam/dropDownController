@@ -24,7 +24,7 @@ var dropDownObject = {
     isTree: true,
     hasMultiSelect: true,
     onChange: function (selectedOptionsArr) {
-        console.log(selectedOptionsArr);
+        //console.log(selectedOptionsArr);
     }
 }
 var dropDownObject1 = {
@@ -34,7 +34,7 @@ var dropDownObject1 = {
     isTree: false,
     hasMultiSelect: false,
     onChange: function (selectedOptionsArr) {
-        console.log(selectedOptionsArr);
+        //console.log(selectedOptionsArr);
     }
 }
 var dropDownObject2 = {
@@ -61,12 +61,12 @@ var dropDownObject4 = {
 
 dropDownList.initalization(dropDownObject);
 dropDownList.initalization(dropDownObject1);
-// dropDownList.initalization(dropDownObject2);
-// dropDownList.initalization(dropDownObject3);
-// dropDownList.initalization(dropDownObject4);
+dropDownList.initalization(dropDownObject2);
+dropDownList.initalization(dropDownObject3);
+dropDownList.initalization(dropDownObject4);
 
 // set default selected values functions 
-dropDownList.setDefaultSelectedValues('dropDownDiv', [1, 3]);
+// dropDownList.setDefaultSelectedValues('dropDownDiv', [1, 3]);
 
 
 

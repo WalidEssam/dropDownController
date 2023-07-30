@@ -118,14 +118,44 @@ var dropDownList = {
 		var selectedClass = "selectedDiv";
 
 		optioncheck.addEventListener('change', function () {
-			var parentDiv = optioncheck.closest('.dropDownDiv_DropDown_Menu_Item');
-			parentDiv.classList.toggle(selectedClass);
+			 var parentDiv = optioncheck.closest('.dropDownDiv_DropDown_Menu_Item');
+			 parentDiv.classList.toggle(selectedClass);
+			// 
+			dropDownList.checkParentAndChilds(parentDiv);
+
 			dropDownList.writeCheckBoxesValuesToBtn(dropDownBtn, elementId);
 			var selectedValuesArr=dropDownList.getSelected(elementId);
-			onChange(selectedValuesArr);
+			if(onChange)
+				onChange(selectedValuesArr);
 		});
 
 		optionDiv.appendChild(optioncheck);
+	},
+	checkParentAndChilds:function(parentDiv)
+	{
+		var selectedClass = "selectedDiv";
+		var allChildrensOfParent=parentDiv.parentElement.children;
+		var parentForChildrens=parentDiv.parentElement.children[0];
+		var allChildsSelected=true;
+
+
+		if(parentForChildrens.classList.contains(selectedClass))
+		{
+			for (var index = 1; index < parentDiv.parentElement.children.length; index++) {
+
+				allChildrensOfParent[index].classList.add(selectedClass);
+				allChildrensOfParent[index].children[1].checked=true;
+			}
+		}else
+		{
+			for (var index = 1; index < parentDiv.parentElement.children.length; index++) {
+
+				if (!allChildrensOfParent[index].classList.contains(selectedClass))
+					allChildsSelected=false;	
+			}
+
+		}
+			
 	},
 	drawSellectAndDesellectBtns: function (dropDownMenu, elementId) {
 
@@ -196,7 +226,8 @@ var dropDownList = {
 		else
 			dropDownBtn.textContent = parentDiv.textContent.trim();// If there are no child elements
 
-		onChange(dropDownList.getSelected(elementId));
+		if(onChange)
+			onChange(dropDownList.getSelected(elementId));
 		
 		dropDownList.toggleDropdown(dropDownMenu);
 
@@ -306,7 +337,6 @@ var dropDownList = {
 		// Check 'isTree' property if present
 		modiFiedObject.isTree = dropDownList.checkIfHasProperty(dropDownObject, 'isTree') && typeof dropDownObject.isTree == 'boolean'
 			? dropDownObject.isTree : false;
-
 
 		// Check 'hasMultiSelect' property if present
 		modiFiedObject.hasMultiSelect = dropDownList.checkIfHasProperty(dropDownObject, 'hasMultiSelect') && typeof dropDownObject.hasMultiSelect == 'boolean'
